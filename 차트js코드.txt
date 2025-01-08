@@ -1,0 +1,265 @@
+<script>
+
+const ctx1 = document.getElementById('chart1').getContext('2d');
+
+Chart.defaults.font.size = 12;
+
+Chart.defaults.font.family = "'noto-web','roboto-web',sans-serif";
+
+const myChart1= new Chart(ctx1, {
+
+    type: "bar",
+
+    data: {
+
+        labels: ['1월', '2월', '3월'],
+
+        datasets: [{
+
+label: '내 사업장',
+
+            data: ["16905340","26905340","6905340"],
+
+            backgroundColor:'#FB521C',
+
+barThickness: 20
+
+        },{
+
+label: '업종평균',
+
+            data: ["16905340","9905340","36905340"],
+
+            backgroundColor:'#FFC24C',
+
+barThickness: 20
+
+        },{
+
+label: '지역평균',
+
+            data: ["26905340","6905340","2905340"],
+
+            backgroundColor:'#C4EB56',
+
+barThickness: 20
+
+        }]
+
+    },
+
+    options: {
+
+plugins: {
+
+legend: {
+
+position: "top",
+
+labels: {
+
+usePointStyle: true,
+
+padding:10
+
+}
+
+}
+
+},
+
+        scales: {
+
+y: {
+
+                stepSize: 50000,
+
+ticks: {
+
+                    // Include a dollar sign in the ticks
+
+                    callback: function(value, index, ticks) {
+
+                        return value/1000000 + 'M';
+
+                    }
+
+                }
+
+            },
+
+X: {
+
+ grid: {
+
+display: false,
+
+  },
+
+}
+
+        }
+
+    }
+
+});
+
+</script>
+
+​
+
+<script>
+
+const ctx = document.getElementById('chart1').getContext('2d');
+
+Chart.defaults.font.size = 10;
+
+Chart.defaults.font.weight = 400;
+
+Chart.defaults.font.family = "'noto-web','roboto-web',sans-serif";
+
+const myChart1= new Chart(ctx, {
+
+    type: "bar",
+
+    data: {
+
+        labels: ['재료', '임차/통신/공과금', '직원/거래처','소모품','기타'],
+
+        datasets: [{
+
+label: '내 사업장',
+
+            data: ["28.77","1.44","7.54","10.23","5.11"],
+
+            backgroundColor:'#FB521C',
+
+barThickness: 12,
+
+borderWidth:1,
+
+borderColor:'#fff'
+
+        },{
+
+label: '동종업종평균',
+
+            data: ["38.47","5.59","22.62","3.7","2.37"],
+
+            backgroundColor:'#D1D5DC',
+
+barThickness: 12,
+
+borderWidth:1,
+
+borderColor:'#fff'
+
+        }]
+
+    },
+
+    options: {
+
+hover : false, 
+
+min:0,
+
+max:100,
+
+indexAxis: 'y',
+
+animation: {
+
+  duration: 0,
+
+  onComplete: function({ chart }) {
+
+const ctx = chart.ctx;
+
+​
+
+chart.config.data.datasets.forEach(function(dataset, i) {
+
+  const meta = chart.getDatasetMeta(i);
+
+​
+
+  meta.data.forEach(function(bar, index) {
+
+const data = dataset.data[index];
+
+​
+
+ctx.fillText(data + "%", bar.x + 5, bar.y);
+
+  });
+
+});
+
+  }
+
+},
+
+plugins: {
+
+legend: {
+
+position: "top",
+
+align: "end",
+
+labels: {
+
+usePointStyle: true,
+
+padding:10
+
+},
+
+onClick: function (e) {
+
+e.preventDefault;
+
+}
+
+},
+
+tooltip: {
+
+enabled: false,
+
+}
+
+},
+
+        scales: {
+
+x: {
+
+display: false,
+
+beginAtZero: true,
+
+suggestedMin: 0,
+
+                suggestedMax: 100
+
+},
+
+        }
+
+    }
+
+});
+
+​
+
+function resetChart(){
+
+myChart1.update();
+
+}
+
+setTimeout(resetChart,50);
+
+</script>
