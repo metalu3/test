@@ -1,5 +1,5 @@
-<script>
-
+<script>2
+325325
 const ctx1 = document.getElementById('chart1').getContext('2d');
 
 Chart.defaults.font.size = 12;
